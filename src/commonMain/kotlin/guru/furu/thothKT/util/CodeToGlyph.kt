@@ -1,6 +1,6 @@
-package guru.furu.thothKT
+package guru.furu.thothKT.util
 
-val _codeToGlyphMap = mapOf<String, String>(
+val codeToGlyphMap = mapOf(
     "A" to "𓄿",
     "i" to "𓇋",
     "y0" to "𓇌",

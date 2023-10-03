@@ -2,6 +2,7 @@ package guru.furu.thothKT
 
 import guru.furu.thothKT.model.DecodedGlyphs
 import guru.furu.thothKT.model.GlyphSubcategory.SubcategoryLocation
+import guru.furu.thothKT.util.codeToGlyphMap
 import java.lang.Integer.parseInt
 import java.util.Locale
 
@@ -16,30 +17,38 @@ class HieroglyphConverterImpl : HieroglyphConverter {
         val sb = StringBuilder()
 
         split.forEach { glyph ->
-            if (glyph.startsWith('[') && glyph.endsWith(']')) {
-                // handle Gardiner Sign List classification numbers
-                convertGardinerSign(glyph, sb)
-            } else if (glyph.startsWith('#')) {
-                // handle raw unicode input
-                val uValue: Int = glyph.takeLast(glyph.length - 1).toInt(16)
-
-                if (uValue !in 0x13000..0x1342E) {
-                    throw GlyphConvertException("Unicode code point not in valid range. ($uValue)")
+            when {
+                glyph.startsWith('[') && glyph.endsWith(']') -> {
+                    // handle Gardiner Sign List classification numbers
+                    convertGardinerSign(glyph, sb)
                 }
 
-                sb.appendCodePoint(uValue)
-            } else if (checkForComputerEncoding(glyph)) {
-                // handle computer encoding
-                val glyphLookup = _codeToGlyphMap[glyph] ?:
+                glyph.startsWith('#') -> {
+                    // handle raw unicode input
+                    val uValue: Int = glyph.takeLast(glyph.length - 1).toInt(16)
+
+                    if (uValue !in 0x13000..0x1342E) {
+                        throw GlyphConvertException("Unicode code point not in valid range. ($uValue)")
+                    }
+
+                    sb.appendCodePoint(uValue)
+                }
+
+                checkForComputerEncoding(glyph) -> {
+                    // handle computer encoding
+                    val glyphLookup = codeToGlyphMap[glyph] ?:
                     throw GlyphConvertException("Computer encoded glyph either improper or not supported: $glyph")
 
-                glyphLookup.codePoints().forEach {
-                    sb.appendCodePoint(it)
+                    glyphLookup.codePoints().forEach {
+                        sb.appendCodePoint(it)
+                    }
                 }
-            } else {
-                // we can't process this
-                val errorMsg = "Couldn't figure out what to do with the input: $glyph. Is it properly encoded? Check the Readme for examples of valid formats."
-                throw GlyphConvertException(errorMsg)
+
+                else -> {
+                    // we can't process this
+                    val errorMsg = "Couldn't figure out what to do with the input: $glyph. Is it properly encoded? Check the Readme for examples of valid formats."
+                    throw GlyphConvertException(errorMsg)
+                }
             }
         }
 
@@ -146,19 +155,19 @@ class HieroglyphConverterImpl : HieroglyphConverter {
         sb.appendCodePoint(curGlyphHexValue)
     }
 
-    private fun nextCategory(curCategory: String): String {
+    private fun nextCategory(curCategory: String): String =
         when(curCategory) {
-            "I" -> return "K"
-            "N" -> return "NL"
-            "NL" -> return "NU"
-            "NU" -> return "O"
-            "Z" -> return "Aa"
-            "Aa" -> return "end"
+            "I" -> "K"
+            "N" -> "NL"
+            "NL" -> "NU"
+            "NU" -> "O"
+            "Z" -> "Aa"
+            "Aa" -> "end"
+            else -> {
+                val nextCat = curCategory[0]
+                String(charArrayOf(nextCat + 1))
+            }
         }
-
-        val nextCat = curCategory[0]
-        return String(charArrayOf(nextCat + 1))
-    }
 
     private fun checkForComputerEncoding(glyph: String): Boolean =
         computerEncodingCharactersRegex.containsMatchIn(glyph)
