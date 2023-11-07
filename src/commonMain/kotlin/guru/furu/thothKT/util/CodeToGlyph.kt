@@ -408,6 +408,7 @@ val codeToGlyphMap = mapOf(
     "Dba" to "𓂭",
     "DrD" to "𓄔",
     "Dsr" to "𓂦",
+    "sxt" to "𓇏",
     "iAdt" to "𓇲",
     "imAx" to "𓄪",
     "imnt" to "𓋀",
