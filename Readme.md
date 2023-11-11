@@ -58,7 +58,7 @@ Unilaterals, bilaterals and trilaterals are all supported.
 
 Additionally, please note that this library uses the computer encoding for the phonetic input described below.
 
-Valid values are as follows: `AaiywWbpfmMnNrlhHxXzsSqkgtTdD`.
+Valid characters are as follows: `AaiywWbpfmMnNrlhHxXzsSqkgtTdD`.
 
 Usage Example:
 
