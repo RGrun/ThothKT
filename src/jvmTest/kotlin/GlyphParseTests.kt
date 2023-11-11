@@ -16,7 +16,7 @@ class GlyphParseTests {
         val input = "a X D TA tyw DHwty"
         val shouldBe = "𓂝𓄡𓆓𓅷𓅂𓁟"
 
-        assertEquals(shouldBe, converter.convert(input).raw)
+        assertEquals(shouldBe, converter.convert(input).glyphs)
     }
 
     @Test
@@ -24,7 +24,7 @@ class GlyphParseTests {
         val input = "a X D TA #13000 #130D1 X a #1305F #13072"
         val shouldBe = "𓂝𓄡𓆓𓅷𓀀𓃑𓄡𓂝𓁟𓁲"
 
-        assertEquals(shouldBe, converter.convert(input).raw)
+        assertEquals(shouldBe, converter.convert(input).glyphs)
     }
 
     @Test
@@ -32,7 +32,7 @@ class GlyphParseTests {
         val input =  "[K1] [Y1] [Z1] [I14] [A1] [N23] [Z2B] [V20E] [A5A] [Aa1] [V33A]"
         val shouldBe =  "𓆛𓏛𓏤𓆙𓀀𓈇𓏧𓎋𓀅𓐍𓎥"
 
-        assertEquals(shouldBe, converter.convert(input).raw)
+        assertEquals(shouldBe, converter.convert(input).glyphs)
     }
 
     @Test
@@ -40,7 +40,7 @@ class GlyphParseTests {
         val input = "[Z2B] TA #13000 [V33A]";
         val shouldBe = "𓏧𓅷𓀀𓎥"
 
-        assertEquals(shouldBe, converter.convert(input).raw)
+        assertEquals(shouldBe, converter.convert(input).glyphs)
     }
 
     @Test
@@ -48,7 +48,7 @@ class GlyphParseTests {
         val input =  "[Aa22]"
         val shouldBe = "\uD80D\uDC24"
 
-        assertEquals(shouldBe, converter.convert(input).raw)
+        assertEquals(shouldBe, converter.convert(input).glyphs)
     }
 
     @Test
