@@ -56,6 +56,10 @@ They will be standardized one day, but until then please forgive my somewhat arb
 
 Unilaterals, bilaterals and trilaterals are all supported.
 
+Additionally, please note that this library uses the computer encoding for the phonetic input described below.
+
+Valid values are as follows: `AaiywWbpfmMnNrlhHxXzsSqkgtTdD`.
+
 Usage Example:
 
 `a X D TA tyw DHwty -> 𓂝𓄡𓆓𓅷𓅂𓁟`
