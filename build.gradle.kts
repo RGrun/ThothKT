@@ -3,8 +3,8 @@ plugins {
     id("maven-publish")
 }
 
-group = "guru.furu.thothKT"
-version = "1.0.2"
+group = "guru.furu"
+version = "1.0.3"
 
 repositories {
     mavenCentral()

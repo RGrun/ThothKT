@@ -17,9 +17,19 @@ val converter: HieroglyphConverter = HieroglyphConverterImpl()
 
 val inputString = "[Z2B] TA #13000 [V33A]"
 
-val result = converter.convert(inputString)
+val result: DecodedGlyphs = converter.convert(inputString)
 
 assertEquals(result.glyphs, "𓏧𓅷𓀀𓎥")
+```
+
+There's also a shortcut String extension function:
+
+```
+val inputString = "[Z2B] TA #13000 [V33A]"
+
+val result: String = inputString.convertGlyphs()
+
+assertEquals(result, "𓏧𓅷𓀀𓎥")
 ```
 
 ## Input types
