@@ -17,6 +17,11 @@ class HieroglyphConverterImpl : HieroglyphConverter {
         val sb = StringBuilder()
 
         split.forEach { glyph ->
+
+            if (glyph.isEmpty()) {
+                return@forEach
+            }
+
             when {
                 glyph.startsWith('[') && glyph.endsWith(']') -> {
                     // handle Gardiner Sign List classification numbers
