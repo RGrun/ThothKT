@@ -27,7 +27,7 @@ There's also a shortcut String extension function:
 ```
 val inputString = "[Z2B] TA #13000 [V33A]"
 
-val result: String = inputString.convertGlyphs()
+val result: String = inputString.convertToGlyphs()
 
 assertEquals(result, "𓏧𓅷𓀀𓎥")
 ```

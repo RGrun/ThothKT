@@ -1,6 +1,6 @@
 import guru.furu.thothKT.GlyphConvertException
 import guru.furu.thothKT.HieroglyphConverterImpl
-import guru.furu.thothKT.convertGlyphs
+import guru.furu.thothKT.convertToGlyphs
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
@@ -57,7 +57,7 @@ class GlyphParseTests {
         val input = "[Z2B] TA #13000 [V33A]";
         val shouldBe = "𓏧𓅷𓀀𓎥"
 
-        assertEquals(shouldBe, input.convertGlyphs())
+        assertEquals(shouldBe, input.convertToGlyphs())
     }
 
     @Test
