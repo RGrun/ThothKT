@@ -459,5 +459,5 @@ val codeToGlyphMap = mapOf(
     "Sndyt" to "𓋯",
     "DHwty" to "𓁟",
     "zXAw" to "𓏞",
-    "tAwy" to "𓈃",
+    "tAwy" to "𓈃"
 )

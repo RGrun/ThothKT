@@ -1,3 +1,3 @@
 package guru.furu.thothKT
 
-class GlyphConvertException(message: String): Exception(message)
+class GlyphConvertException(message: String) : Exception(message)

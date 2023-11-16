@@ -1,6 +1,8 @@
 plugins {
     kotlin("multiplatform") version "1.8.0"
     id("maven-publish")
+    id("org.jlleitschuh.gradle.ktlint") version "11.6.1"
+    id("org.jlleitschuh.gradle.ktlint-idea") version "11.6.1"
 }
 
 group = "guru.furu"

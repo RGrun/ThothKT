@@ -41,8 +41,8 @@ class HieroglyphConverterImpl : HieroglyphConverter {
 
                 checkForComputerEncoding(glyph) -> {
                     // handle computer encoding
-                    val glyphLookup = codeToGlyphMap[glyph] ?:
-                    throw GlyphConvertException("Computer encoded glyph either improper or not supported: $glyph")
+                    val glyphLookup = codeToGlyphMap[glyph]
+                        ?: throw GlyphConvertException("Computer encoded glyph either improper or not supported: $glyph")
 
                     glyphLookup.codePoints().forEach {
                         sb.appendCodePoint(it)
@@ -88,8 +88,8 @@ class HieroglyphConverterImpl : HieroglyphConverter {
 
         if (rawGardinerSign.startsWith("Aa") ||
             rawGardinerSign.startsWith("NU") ||
-            rawGardinerSign.startsWith("NL")) {
-
+            rawGardinerSign.startsWith("NL")
+        ) {
             // special case
             categoryCode = rawGardinerSign.take(2)
             number = parseInt(rawGardinerSign.substring(2, rawGardinerSign.length))
@@ -105,7 +105,9 @@ class HieroglyphConverterImpl : HieroglyphConverter {
         val nextCategoryCode = nextCategory(categoryCode)
 
         // category Aa has 34 glyphs
-        val catDiff = if(nextCategoryCode == "end") 34 else {
+        val catDiff = if (nextCategoryCode == "end") {
+            34
+        } else {
             _categoryStartLocations[nextCategoryCode]!! - _categoryStartLocations[categoryCode]!!
         }
 
@@ -120,20 +122,20 @@ class HieroglyphConverterImpl : HieroglyphConverter {
         }
 
         var locInCategory = 1
-        while(locInCategory <= catDiff) {
+        while (locInCategory <= catDiff) {
             if (locInCategory == number && locInCategory != curSC.start) {
                 break
             }
 
-            if(locInCategory == curSC.start) {
+            if (locInCategory == curSC.start) {
                 if (locInCategory == number) {
-                    if(secondaryIndex == '0') {
+                    if (secondaryIndex == '0') {
                         break
                     }
 
                     // scan forward
                     var curChar = 'A'
-                    while(curChar != secondaryIndex) {
+                    while (curChar != secondaryIndex) {
                         curChar++
                         curGlyphHexValue++
                     }
@@ -161,7 +163,7 @@ class HieroglyphConverterImpl : HieroglyphConverter {
     }
 
     private fun nextCategory(curCategory: String): String =
-        when(curCategory) {
+        when (curCategory) {
             "I" -> "K"
             "N" -> "NL"
             "NL" -> "NU"
