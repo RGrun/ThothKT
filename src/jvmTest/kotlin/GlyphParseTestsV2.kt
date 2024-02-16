@@ -1,14 +1,13 @@
 import guru.furu.thothKT.GlyphConvertException
-import guru.furu.thothKT.HieroglyphConverterImpl
+import guru.furu.thothKT.HieroglyphConverterImplV2
 import guru.furu.thothKT.convertToGlyphs
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 
-class GlyphParseTests {
-
+class GlyphParseTestsV2 {
     companion object {
-        val converter = HieroglyphConverterImpl()
+        val converter = HieroglyphConverterImplV2()
     }
 
     @Test
@@ -29,7 +28,7 @@ class GlyphParseTests {
 
     @Test
     fun `test gardiner input`() {
-        val input = "[K1] [Y1] [Z1] [I14] [A1] [N23] [Z2B] [V20E] [A5A] [Aa1] [V33A]"
+        val input = "*K1 *Y1 *Z1 *I14 *A1 *N23 *Z2B *V20E *A5A *Aa1 *V33A"
         val shouldBe = "𓆛𓏛𓏤𓆙𓀀𓈇𓏧𓎋𓀅𓐍𓎥"
 
         assertEquals(shouldBe, converter.convert(input).glyphs)
@@ -37,7 +36,7 @@ class GlyphParseTests {
 
     @Test
     fun `test mixed input`() {
-        val input = "[Z2B] TA #13000 [V33A]"
+        val input = "*Z2B TA #13000 *V33A"
         val shouldBe = "𓏧𓅷𓀀𓎥"
 
         assertEquals(shouldBe, converter.convert(input).glyphs)
@@ -45,7 +44,7 @@ class GlyphParseTests {
 
     @Test
     fun `manual test`() {
-        val input = "[Aa22]"
+        val input = "*Aa22"
         val shouldBe = "\uD80D\uDC24"
 
         assertEquals(shouldBe, converter.convert(input).glyphs)
@@ -53,7 +52,7 @@ class GlyphParseTests {
 
     @Test
     fun `test String extension function`() {
-        val input = "[Z2B] TA #13000 [V33A]"
+        val input = "*Z2B TA #13000 *V33A"
         val shouldBe = "𓏧𓅷𓀀𓎥"
 
         assertEquals(shouldBe, input.convertToGlyphs())
@@ -61,11 +60,11 @@ class GlyphParseTests {
 
     @Test
     fun `test failure on invalid input`() {
-        val input1 = "[Z2B] TA #13000 V33A]"
-        val input2 = "[Z2B] F #13000 [V33A]"
-        val input3 = "[Z2B TA 13000 [V33A]"
-        val input4 = "[Z2B] TA #13000 V33A]"
-        val input5 = "[Z2B] TA #13000 [V33Z]"
+        val input1 = "*Z2B TA #13000 V33A"
+        val input2 = "*Z2B F #13000 *V33A"
+        val input3 = "*Z2B TA 13000 *V33A"
+        val input4 = "*Z2B TA #13000 V33A"
+        val input5 = "*Z2B TA #13000 *V33Z"
 
         assertFailsWith<GlyphConvertException> { converter.convert(input1) }
         assertFailsWith<GlyphConvertException> { converter.convert(input2) }
