@@ -43,9 +43,9 @@ class GlyphParseTestsV2 {
     }
 
     @Test
-    fun `manual test`() {
-        val input = "*Aa22"
-        val shouldBe = "\uD80D\uDC24"
+    fun `'the woman is beautiful' test`() {
+        val input = "nfr f r Him t *B1 t n"
+        val shouldBe = "𓄤𓆑𓂋𓈞𓏏𓁐𓏏𓈖"
 
         assertEquals(shouldBe, converter.convert(input).glyphs)
     }
