@@ -11,6 +11,14 @@ class GlyphParseTestsV2 {
     }
 
     @Test
+    fun `ad-hoc test`() {
+        val input = "*M1B *M12"
+        val shouldBe = "𓆯𓆼"
+
+        assertEquals(shouldBe, converter.convert(input).glyphs)
+    }
+
+    @Test
     fun `test computer encoded input`() {
         val input = "a X D TA tyw DHwty"
         val shouldBe = "𓂝𓄡𓆓𓅷𓅂𓁟"

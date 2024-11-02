@@ -305,7 +305,7 @@ val _gardinerCategories = mapOf<String, GlyphSubcategory>(
         locations = listOf(
             SubcategoryLocation(
                 start = 1,
-                length = 1
+                length = 2
             ),
             SubcategoryLocation(
                 start = 3,
